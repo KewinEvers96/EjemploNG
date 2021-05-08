@@ -14,5 +14,10 @@ export class EmpleadoListService {
   public getEmployees()  {
     return this.http.get<Empleado[]>("http://localhost:8000/employees");
   }
-s
+
+  public postEmployee(empleado : Empleado) {
+    return this.http.post("http://localhost:8000/employees", 
+                          empleado);
+  }
+
 }

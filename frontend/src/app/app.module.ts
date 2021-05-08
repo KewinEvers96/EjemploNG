@@ -7,14 +7,16 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EmpleadosListComponent } from './empleados-list/empleados-list.component';
-import {HttpClientModule } from '@angular/common/http'
+import {HttpClientModule } from '@angular/common/http';
+import { RegistroEmpleadoComponent } from './registro-empleado/registro-empleado.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    EmpleadosListComponent
+    EmpleadosListComponent,
+    RegistroEmpleadoComponent
   ],
   imports: [
     BrowserModule,
