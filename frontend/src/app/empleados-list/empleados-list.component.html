@@ -1,1 +1,24 @@
-<p>empleados-list works!</p>
+<div class="container">
+    <div *ngFor= "let empleado of empleados">
+        <div class="jumbotron">
+            <table>
+                <tr>
+                    <td><span>Id</span></td>
+                    <td>{{empleado.id}}</td>
+                </tr>
+                <tr>
+                    <td><span>Nombre</span></td>
+                    <td>{{empleado.nombres}}</td>
+                </tr>
+                <tr>
+                    <td><span>Apellidos</span></td>
+                    <td>{{empleado.apellidos}}</td>
+                </tr>
+                <tr>
+                    <td><span>Sueldo</span></td>
+                    <td>{{empleado.sueldo | currency}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
