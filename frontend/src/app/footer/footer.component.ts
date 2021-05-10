@@ -8,9 +8,9 @@ import {  faGithub, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-
 })
 export class FooterComponent implements OnInit {
 
-  fa_Github  = faGithub;
-  fa_ig = faInstagram;
-  fa_yt = faYoutube;
+  faGithub  = faGithub;
+  faIg = faInstagram;
+  faYt = faYoutube;
   constructor() { }
 
   ngOnInit(): void {

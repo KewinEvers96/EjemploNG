@@ -8,7 +8,8 @@ import { FooterComponent } from './footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EmpleadosListComponent } from './empleados-list/empleados-list.component';
 import {HttpClientModule } from '@angular/common/http';
-import { RegistroEmpleadoComponent } from './registro-empleado/registro-empleado.component'
+import { RegistroEmpleadoComponent } from './registro-empleado/registro-empleado.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { RegistroEmpleadoComponent } from './registro-empleado/registro-empleado
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

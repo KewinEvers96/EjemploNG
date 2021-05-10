@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Empleado } from '../empleados-list/empleados-list.component';
 
 @Component({
   selector: 'app-registro-empleado',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroEmpleadoComponent implements OnInit {
 
-  constructor() { }
+  empleado: Empleado = new Empleado(-1, '', '', 0, '');
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+  }
+
+  crearEmpleado(): void {
+    console.log();
   }
 
 }
