@@ -4,24 +4,24 @@ const db = require('../db');
  * Postgresql queries
  */
 
-const insertNewEmployee = "INSERT INTO empleado(nombres, apellidos, sueldo) VALUES($1, $2, $3)";
+const insertNewEmployee = "INSERT INTO empleado(name, lastname, salary) VALUES($1, $2, $3)";
 
 const findAllEmployees = "SELECT * FROM empleado";
-const findByName = "SELECT * FROM empleado WHERE nombres LIKE '%' || $1 || '%'";
-const findByLastname = "SELECT * FROM empleado WHERE apellidos LIKE $1";
+const findByName = "SELECT * FROM empleado WHERE name LIKE '%' || $1 || '%'";
+const findByLastname = "SELECT * FROM empleado WHERE lastname LIKE $1";
 const findById = "SELECT * FROM empleado WHERE id = $1";
 
 
 const deleteAllEmployees = "DELETE FROM empleado";
 const deleteById = "DELETE FROM empleado WHERE id = $1";
 
-const updateAllById             = "UPDATE empleado SET nombres = $1, apellidos = $2, sueldo = $3 WHERE id = $4";
-const updateNameAndLastName     = "UPDATE empleado SET nombres = $1, apellidos = $2 WHERE id = $3";
-const updateNameAndSalary       = "UPDATE empleado SET nombres = $1, sueldo = $2 WHERE id = $3";
-const updateLastNameAndSalary   = "UPDATE empleado SET apellidos = $1, sueldo = $2 WHERE id = $3";
-const updateNameById            = "UPDATE empleado SET nombres = $1 WHERE id = $2";
-const updateLastNameById        = "UPDATE empleado SET apellidos = $1 WHERE id = $2";
-const updateSalaryById          = "UPDATE empleado SET sueldo = $1 WHERE id = $2";
+const updateAllById             = "UPDATE empleado SET name = $1, lastname = $2, salary = $3 WHERE id = $4";
+const updateNameAndLastName     = "UPDATE empleado SET name = $1, lastname = $2 WHERE id = $3";
+const updateNameAndSalary       = "UPDATE empleado SET name = $1, salary = $2 WHERE id = $3";
+const updateLastNameAndSalary   = "UPDATE empleado SET lastname = $1, salary = $2 WHERE id = $3";
+const updateNameById            = "UPDATE empleado SET name = $1 WHERE id = $2";
+const updateLastNameById        = "UPDATE empleado SET lastname = $1 WHERE id = $2";
+const updateSalaryById          = "UPDATE empleado SET salary = $1 WHERE id = $2";
 const updatePhotoById           = "UPDATE empleado SET imageUrl  = $1 WHERE id = $2";
 
 /**
