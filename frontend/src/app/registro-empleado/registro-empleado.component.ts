@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Empleado } from '../empleados-list/empleados-list.component';
+import { EmpleadoListService } from '../service/empleado-list.service';
 
 @Component({
   selector: 'app-registro-empleado',
@@ -9,15 +10,21 @@ import { Empleado } from '../empleados-list/empleados-list.component';
 })
 export class RegistroEmpleadoComponent implements OnInit {
 
-  empleado: Empleado = new Empleado(-1, '', '', 0, '');
+  empleado: Empleado; 
 
-  constructor(private http: HttpClient) { }
+  constructor(private empleadoService: EmpleadoListService,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.empleado = new Empleado(-1, '', '', 0, '');
   }
 
   crearEmpleado(): void {
-    console.log();
+    this.empleadoService.postEmployee(this.empleado).subscribe(
+      response => {
+        this.router.navigate(["empleados"]);
+      }
+    );
   }
 
 }
