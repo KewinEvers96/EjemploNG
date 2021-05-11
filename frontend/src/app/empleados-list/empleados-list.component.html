@@ -19,9 +19,13 @@
                     <td>{{empleado.salary | currency}}</td>
                 </tr>
             </table>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-warning m-3">Actualizar</button>
+                <button class="btn btn-danger m-3" (click)=deleteEmployee(empleado.id)>Eliminar</button>
+            </div>
         </div>
     </div>
     <div class="my-5">
-        <button class="btn btn-success" (click) =loadRegisterEmployee()>Ingresar nuevo empleado</button>
+        <button class="btn btn-success" (click)=loadRegisterEmployee()>Ingresar nuevo empleado</button>
     </div>  
 </div>

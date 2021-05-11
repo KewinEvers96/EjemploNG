@@ -24,6 +24,10 @@ export class EmpleadosListComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.loadEmployees();
+  }
+
+  loadEmployees(): void{
     this.empleadoService.getEmployees().subscribe(
       response => {
         console.log(response);
@@ -37,6 +41,17 @@ export class EmpleadosListComponent implements OnInit {
 
   loadRegisterEmployee(): void {
     this.router.navigate(['new'], { relativeTo : this.route});
+  }
+
+  deleteEmployee(id: number): void{
+    this.empleadoService.deleteEmployee(id).subscribe(
+      response => {
+        console.log(response);
+        this.loadEmployees();
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 
 }
