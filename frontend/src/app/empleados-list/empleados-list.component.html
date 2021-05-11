@@ -20,7 +20,7 @@
                 </tr>
             </table>
             <div class="d-flex justify-content-center">
-                <button class="btn btn-warning m-3">Actualizar</button>
+                <button class="btn btn-warning m-3" (click)=loadUpdateEmployeeForm(empleado.id)>Actualizar</button>
                 <button class="btn btn-danger m-3" (click)=deleteEmployee(empleado.id)>Eliminar</button>
             </div>
         </div>

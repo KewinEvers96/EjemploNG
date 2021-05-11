@@ -152,7 +152,7 @@ router.put("/:id", searchEmployeeExistance, (req, res, next) => {
     .then((result) => {
         res.setHeader("Content-Type", "application/json");
         res.status(200);
-        res.json(result);
+        res.json({result: "OK", message: `Empleado ${req.params.id} actualizado`});
     })
     .catch((err) => next(err));
 });

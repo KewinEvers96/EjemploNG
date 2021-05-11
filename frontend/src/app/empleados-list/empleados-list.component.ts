@@ -40,7 +40,11 @@ export class EmpleadosListComponent implements OnInit {
   }
 
   loadRegisterEmployee(): void {
-    this.router.navigate(['new'], { relativeTo : this.route});
+    this.router.navigate(['new'], { relativeTo: this.route});
+  }
+
+  loadUpdateEmployeeForm(id: number): void {
+    this.router.navigate([`${id}/edit`], {relativeTo: this.route});
   }
 
   deleteEmployee(id: number): void{

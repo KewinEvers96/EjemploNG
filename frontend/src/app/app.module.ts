@@ -10,6 +10,7 @@ import { EmpleadosListComponent } from './empleados-list/empleados-list.componen
 import {HttpClientModule } from '@angular/common/http';
 import { RegistroEmpleadoComponent } from './registro-empleado/registro-empleado.component';
 import { FormsModule } from '@angular/forms';
+import { ActualizarEmpleadoComponent } from './actualizar-empleado/actualizar-empleado.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     FooterComponent,
     EmpleadosListComponent,
-    RegistroEmpleadoComponent
+    RegistroEmpleadoComponent,
+    ActualizarEmpleadoComponent
   ],
   imports: [
     BrowserModule,

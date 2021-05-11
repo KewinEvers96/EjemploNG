@@ -24,4 +24,13 @@ export class EmpleadoListService {
   public deleteEmployee(id: number): Observable<any>{
     return this.http.delete(`http://localhost:8000/employees/${id}`);
   }
+
+  public getEmployeeById(id: number): Observable<Empleado>{
+    return this.http.get<Empleado>(`http://localhost:8000/employees/${id}`);
+  }
+
+  public updateEmployeeId(id: number, empleado: Empleado): Observable<any>{
+    return this.http.put(`http://localhost:8000/employees/${id}`, empleado);
+  }
+
 }

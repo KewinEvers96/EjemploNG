@@ -10,7 +10,7 @@ import { EmpleadoListService } from '../service/empleado-list.service';
 })
 export class RegistroEmpleadoComponent implements OnInit {
 
-  empleado: Empleado; 
+  empleado: Empleado;
 
   constructor(private empleadoService: EmpleadoListService,
               private router: Router) { }
@@ -22,7 +22,7 @@ export class RegistroEmpleadoComponent implements OnInit {
   crearEmpleado(): void {
     this.empleadoService.postEmployee(this.empleado).subscribe(
       response => {
-        this.router.navigate(["empleados"]);
+        this.router.navigate(['empleados']);
       }
     );
   }
