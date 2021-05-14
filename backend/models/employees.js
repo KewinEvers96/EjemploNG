@@ -6,7 +6,7 @@ const db = require('../db');
 
 const insertNewEmployee = "INSERT INTO empleado(name, lastname, salary) VALUES($1, $2, $3)";
 
-const findAllEmployees = "SELECT * FROM empleado";
+const findAllEmployees = "SELECT * FROM empleado ORDER BY id DESC LIMIT 5 OFFSET $1";
 const findByName = "SELECT * FROM empleado WHERE name LIKE '%' || $1 || '%'";
 const findByLastname = "SELECT * FROM empleado WHERE lastname LIKE $1";
 const findById = "SELECT * FROM empleado WHERE id = $1";
@@ -30,8 +30,8 @@ const updatePhotoById           = "UPDATE empleado SET imageUrl  = $1 WHERE id =
 
 let Employee  = {}
 
-Employee.findAllEmployees = (callback) => {
-    return db.query(findAllEmployees, [], callback);
+Employee.findAllEmployees = (page, callback) => {
+    return db.query(findAllEmployees, [page], callback);
 }
 
 /**

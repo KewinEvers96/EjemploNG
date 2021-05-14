@@ -35,7 +35,7 @@ let upload = Multer({storage : storage});
 router.use(Cors(corsOptions));
 
 router.get("/",  (req, res, next) => {
-    Employee.findAllEmployees()
+    Employee.findAllEmployees(0)
     .then((result) => {
         let employees = [];
         result.rows.forEach(employee => {
@@ -56,6 +56,32 @@ router.get("/",  (req, res, next) => {
 });
 
 /**
+ * Pagination
+ */
+
+router.get("/page/:number", (req, res, next) => {
+    let number = parseInt(req.params.number) * 5;
+    Employee.findAllEmployees(number)
+    .then((result) => {
+        let employees = [];
+        result.rows.forEach(employee => {
+            employee.links = {
+                self : "http://localhost:8000/employees/" + employee.id,
+                collection: "http://localhost:8000/employees"
+            }
+            employees.push(employee);
+        });
+        return employees;
+    })
+    .then((employees) => {
+        res.status(200);
+        res.setHeader("Content-Type", "application/json");
+        return res.json(employees);
+    })
+    .catch((err) => next(err));
+});
+
+/**
  * POST /employees 
  * Register a new employeee 
  */
@@ -69,7 +95,7 @@ router.post("/",(req, res, next) => {
     Employee.create(employee)
     .then((result) => {
         res.setHeader("Content-Type", "application/json");
-        res.status(200);
+        res.status(201);
         res.json({registration: true, inserted:result.rowCount});
     })
     .catch((err) => next(err));
@@ -151,7 +177,7 @@ router.put("/:id", searchEmployeeExistance, (req, res, next) => {
     Employee.updateById(req.params.id, employee )
     .then((result) => {
         res.setHeader("Content-Type", "application/json");
-        res.status(200);
+        res.status(201);
         res.json({result: "OK", message: `Empleado ${req.params.id} actualizado`});
     })
     .catch((err) => next(err));

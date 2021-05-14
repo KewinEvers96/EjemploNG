@@ -3,12 +3,12 @@ const db = require('../db');
 /**
  * PSQL queries
  */
-
+// insertion
 const createProduct = "INSERT INTO producto(nombre, precio, cantidad) VALUES ($1, $2, $3)";
+// reading
 const getProductById = "SELECT nombre, precio, cantidad FROM producto WHERE id = $1";
-
 const getAllProducts = "SELECT * FROM producto";
-
+// 
 const updateAllAttrProductById = "UPDATE producto SET nombre = $1, precio = $2, cantidad = $3 WHERE id = $4"
 
 /**
