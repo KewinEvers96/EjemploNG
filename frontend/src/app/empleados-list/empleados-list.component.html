@@ -26,6 +26,12 @@
         </div>
     </div>
     <div class="my-5">
-        <button class="btn btn-success" (click)=loadRegisterEmployee()>Ingresar nuevo empleado</button>
-    </div>  
+        <a class="btn btn-success" routerLink="/empleados/new">Ingresar nuevo empleado</a>
+    </div>
+    <nav>
+        <ul class="pagination">
+            <li class="page-item" *ngIf="previousPage > 0"><a class="btn btn-primary page-link" routerLink="/empleados/page/{{previousPage}}">Anterior</a></li>
+            <li class="page-item"><a class="btn btn-primary page-link" routerLink="/empleados/page/{{nextPage}}">Siguiente</a></li>
+        </ul>
+    </nav>
 </div>

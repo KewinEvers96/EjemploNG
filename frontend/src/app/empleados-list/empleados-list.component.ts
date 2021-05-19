@@ -18,25 +18,50 @@ export class Empleado  {
 export class EmpleadosListComponent implements OnInit {
 
   empleados: Empleado[] = [];
+  previousPage = -1;
+  page = -1;
+  nextPage = 1;
+  sub: any;
 
   constructor(private empleadoService: EmpleadoListService,
               private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.loadEmployees();
-  }
-
-  loadEmployees(): void{
-    this.empleadoService.getEmployees().subscribe(
-      response => {
-        console.log(response);
-        this.empleados = response;
-      },
-      error => {
-        console.log(error);
+    this.sub = this.route.params.subscribe(
+      params => {
+        if ( params.number ){
+          this.page = parseInt(params.number);
+          this.nextPage = this.page + 1;
+          this.previousPage = this.page - 1;
+          this.loadEmployees(this.page);
+        } else{
+          this.loadEmployees();
+        }
       }
     );
+  }
+
+  loadEmployees(page: number = 0): void{
+    if ( page > 0 ){
+      this.empleadoService.getEmployeesPage(page).subscribe(
+        response => {
+          this.empleados = response;
+        }, error => {
+          console.log(error);
+        }
+      );
+    }else{
+      this.empleadoService.getEmployees().subscribe(
+        response => {
+          this.empleados = response;
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
+    
   }
 
   loadRegisterEmployee(): void {
@@ -56,6 +81,10 @@ export class EmpleadosListComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  ngOnDestroy(): void{
+    this.sub.unsubscribe();
   }
 
 }

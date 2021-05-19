@@ -33,4 +33,7 @@ export class EmpleadoListService {
     return this.http.put(`http://localhost:8000/employees/${id}`, empleado);
   }
 
+  public getEmployeesPage(page: number): Observable<Empleado[]>{
+    return this.http.get<Empleado[]>(`http://localhost:8000/employees/page/${page}`);
+  }
 }
