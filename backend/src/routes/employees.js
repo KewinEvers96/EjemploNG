@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const router = express.Router();
 const Employee = require('../../models/employees');
 const Multer = require('multer');
-const url = require('url');
 const {Cors, corsOptions} = require('../cors');
 const fs = require('fs');
 
@@ -35,13 +34,15 @@ let upload = Multer({storage : storage});
 router.use(Cors(corsOptions));
 
 router.get("/",  (req, res, next) => {
+    
+    let baseUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
     Employee.findAllEmployees(0)
     .then((result) => {
         let employees = [];
         result.rows.forEach(employee => {
             employee.links = {
-                self: "http://localhost:8000/employees/" + employee.id,
-                collection : "http://localhost:8000/employees"
+                self: `${baseUrl}/${employee.id}`,
+                collection : baseUrl
             }
             employees.push(employee);
         });
@@ -60,14 +61,16 @@ router.get("/",  (req, res, next) => {
  */
 
 router.get("/page/:number", (req, res, next) => {
+    
+    let baseUrl = `${req.protocol}://${req.get('host')}/employees`;
     let number = parseInt(req.params.number) * 5;
     Employee.findAllEmployees(number)
     .then((result) => {
         let employees = [];
         result.rows.forEach(employee => {
             employee.links = {
-                self : "http://localhost:8000/employees/" + employee.id,
-                collection: "http://localhost:8000/employees"
+                self : `${baseUrl}/${employee.id}`,
+                collection: baseUrl
             }
             employees.push(employee);
         });
@@ -147,13 +150,15 @@ router.get("/search", (req, res, next) => {
  */
 
 router.get("/:id", (req, res, next) => {
+    
+    let baseUrl = `${req.protocol}://${req.get('host')}/employees`;
     Employee.findById(req.params.id)
     .then((result) => {
 
         let empleado = result.rows[0];
         empleado.links = { 
-            self : "http://localhost:8000/employees/" + empleado.id,
-            collection: "http://localhost:8000/employees"
+            self : `${baseUrl}/${empleado.id}`,
+            collection: baseUrl
         }
         res.status(200);
         res.setHeader('Content-Type', 'application/json');

@@ -4,25 +4,25 @@ const db = require('../db');
  * Postgresql queries
  */
 
-const insertNewEmployee = "INSERT INTO empleado(name, lastname, salary) VALUES($1, $2, $3)";
+const insertNewEmployee = "INSERT INTO employees(name, lastname, salary) VALUES($1, $2, $3)";
 
-const findAllEmployees = "SELECT * FROM empleado ORDER BY id DESC LIMIT 5 OFFSET $1";
-const findByName = "SELECT * FROM empleado WHERE name LIKE '%' || $1 || '%'";
-const findByLastname = "SELECT * FROM empleado WHERE lastname LIKE $1";
-const findById = "SELECT * FROM empleado WHERE id = $1";
+const findAllEmployees = "SELECT * FROM employees ORDER BY id DESC LIMIT 5 OFFSET $1";
+const findByName = "SELECT * FROM employees WHERE name LIKE '%' || $1 || '%'";
+const findByLastname = "SELECT * FROM employees WHERE lastname LIKE $1";
+const findById = "SELECT * FROM employees WHERE id = $1";
 
 
-const deleteAllEmployees = "DELETE FROM empleado";
-const deleteById = "DELETE FROM empleado WHERE id = $1";
+const deleteAllEmployees = "DELETE FROM employees";
+const deleteById = "DELETE FROM employees WHERE id = $1";
 
-const updateAllById             = "UPDATE empleado SET name = $1, lastname = $2, salary = $3 WHERE id = $4";
-const updateNameAndLastName     = "UPDATE empleado SET name = $1, lastname = $2 WHERE id = $3";
-const updateNameAndSalary       = "UPDATE empleado SET name = $1, salary = $2 WHERE id = $3";
-const updateLastNameAndSalary   = "UPDATE empleado SET lastname = $1, salary = $2 WHERE id = $3";
-const updateNameById            = "UPDATE empleado SET name = $1 WHERE id = $2";
-const updateLastNameById        = "UPDATE empleado SET lastname = $1 WHERE id = $2";
-const updateSalaryById          = "UPDATE empleado SET salary = $1 WHERE id = $2";
-const updatePhotoById           = "UPDATE empleado SET imageUrl  = $1 WHERE id = $2";
+const updateAllById             = "UPDATE employees SET name = $1, lastname = $2, salary = $3 WHERE id = $4";
+const updateNameAndLastName     = "UPDATE employees SET name = $1, lastname = $2 WHERE id = $3";
+const updateNameAndSalary       = "UPDATE employees SET name = $1, salary = $2 WHERE id = $3";
+const updateLastNameAndSalary   = "UPDATE employees SET lastname = $1, salary = $2 WHERE id = $3";
+const updateNameById            = "UPDATE employees SET name = $1 WHERE id = $2";
+const updateLastNameById        = "UPDATE employees SET lastname = $1 WHERE id = $2";
+const updateSalaryById          = "UPDATE employees SET salary = $1 WHERE id = $2";
+const updatePhotoById           = "UPDATE employees SET imageUrl  = $1 WHERE id = $2";
 
 /**
  * Functions
