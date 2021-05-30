@@ -11,7 +11,7 @@ router.use(bodyParser.json());
  */
 router.get("/", (req, res, next) => {
     let baseUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
-    Product.getAllProducts()
+    Product.getAllProducts(0)
     .then((result) => {
         let products = result.rows;
 
@@ -40,10 +40,29 @@ router.post("/", (req, res, next) => {
     .then((result) => {
         res.setHeader("Content-Type", "application/json");
         res.status(201);
-        res.json(result);
+        res.json({result: "OK", message:"New product registered!"});
     })
     .catch((err) => next(err));
 });
+
+router.get("/page/:number", (req, res, next) => {
+    let page = parseInt(req.params.number);
+    let baseUrl = `${req.protocol}://${req.get('host')}/products`
+    Product.getAllProducts(page * 5)
+    .then(result => {
+        let products = result.rows;
+
+        products.forEach(product => {
+            product.links = {
+                self: `${baseUrl}/${product.code}`,
+                collection: baseUrl
+            }
+        });
+        res.setHeader("Content-Type", "application/json");
+        res.status(200);
+        res.json(products);
+    }).catch( err => next(err));
+})
 
 router.get("/:id", (req, res, next) => {
     let baseUrl = `${req.protocol}://${req.get('host')}/products`
@@ -68,13 +87,24 @@ router.get("/:id", (req, res, next) => {
 });
 
 
-router.put("/:id",  (req, res, next) => {
+router.put("/:code",  (req, res, next) => {
     Product.update(req.params.id, req.body)
     .then( result => {
         res.status(201);
         res.setHeader('Content-Type', 'application/json');
-        res.send({result: 'OK', message: `Product ${product.code} updated!`});
+        res.send({result: 'OK', message: `Product ${req.params.code} updated!`});
     })
     .catch((err) => next(err));  
+});
+
+router.delete("/:code", (req, res, next) => {
+    Product.deleteByCode(req.params.code)
+    .then(
+        result =>{
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200);
+            res.json({result: "OK", message: `Product ${req.params.code} deleted!`});
+        }
+    ).catch()
 });
 module.exports = router;

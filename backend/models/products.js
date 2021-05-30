@@ -7,7 +7,7 @@ const db = require('../db');
 const createProduct = "INSERT INTO products(name, price, quantity) VALUES ($1, $2, $3)";
 // reading
 const getProductById = "SELECT * FROM products WHERE code = $1";
-const getAllProducts = "SELECT * FROM products";
+const getAllProducts = "SELECT * FROM products ORDER BY code DESC LIMIT 5 OFFSET $1";
 // update all attribute of product
 const updateAllAttrProductByCode = "UPDATE products SET name = $1, price = $2, quantity = $3 WHERE code = $4";
 const updateNamePriceByCode = "UPDATE products SET name  = $1, price = $2 WHERE code = $3";
@@ -15,6 +15,8 @@ const updateNameQuantityByCode = "UPDATE products SET name = $1, quantity = $2 W
 const updateNameByCode = "UPDATE products SET name = $1 WHERE code = $2";
 const updatePriceByCode = "UPDATE products SET price = $1 WHERE code = $2";
 const updateQuantityByCode = "UPDATE products SET quantity = $1 WHERE code = $2";
+// delete
+const deleteByCode = "DELETE FROM products WHERE code = $1";
 
 /**
  * Product functions
@@ -27,8 +29,8 @@ Product.createProduct = (product, callback) => {
     return db.query(createProduct, params, callback);
 }
 
-Product.getAllProducts = (callback) => {
-    return db.query(getAllProducts, [], callback);
+Product.getAllProducts = (offset, callback) => {
+    return db.query(getAllProducts, [offset], callback);
 }
 
 Product.getProductById = (id, callback) => {
@@ -53,4 +55,7 @@ Product.update = (id, newProduct, callback) => {
     }
 }
 
+Product.deleteByCode = (code, callback) => {
+    return db.query(deleteByCode, [code], callback);
+}
 module.exports = Product;
