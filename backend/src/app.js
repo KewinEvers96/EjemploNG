@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const Passport = require('passport');
+const JwtStrategy = require('passport-jwt');
+
 const PORT = 8000 || process.env.port;
 
 /**
