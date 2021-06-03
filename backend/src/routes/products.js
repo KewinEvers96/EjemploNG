@@ -1,11 +1,11 @@
 const Product = require('../../models/products');
 const Router = require('express').Router;
 const bodyParser = require('body-parser');
-
+const {Cors, corsOptions} = require('../cors');
 const router = new Router();
 
 router.use(bodyParser.json());
-
+router.use(Cors(corsOptions));
 /**
  * GET /products
  */

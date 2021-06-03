@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
+const auth = require('../authenticate');
 const Employee = require('../../models/employees');
 const Multer = require('multer');
 const {Cors, corsOptions} = require('../cors');
@@ -89,7 +90,7 @@ router.get("/page/:number", (req, res, next) => {
  * Register a new employeee 
  */
 
-router.post("/",(req, res, next) => {
+router.post("/",auth.verifyAdmin, (req, res, next) => {
     let employee = {}
     employee.name = req.body.name;
     employee.lastName = req.body.lastname;
