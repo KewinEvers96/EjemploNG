@@ -14,7 +14,7 @@ router.post("/login",passport.authenticate('local', {session: false}), (req, res
         if (err) {
             return next(err);
         }
-        let user = {username: req.body.username}
+        let user = {username: req.body.username, employee_id: result.rows[0].employee_id}
         let token = auth.getToken(user);
         res.status(200);
         res.setHeader('Content-Type', 'application/json');

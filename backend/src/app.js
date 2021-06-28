@@ -11,6 +11,7 @@ const PORT = 8000 || process.env.port;
  */
 const employeeRouter = require('./routes/employees');
 const productRouter = require('./routes/products');
+const sellsRouter = require('./routes/sells');
 const index = require('./routes');
 /**
  * 
@@ -46,7 +47,7 @@ app.use(passport.initialize());
 app.use(index);
 app.use("/employees", employeeRouter);
 app.use("/products", productRouter);
-
+app.use("/sells", sellsRouter);
 
 
 app.use((err, req, res, next) => {
